@@ -11,7 +11,50 @@
 
 Proyecto Universitario open-source en donde se mantiene una plataforma web que facilita información sobre las mallas en la Universidad.
 
+---
 
+Esta rama corresponde al version 2 de la malla, rescrita desde cero usando `TypeScript` junto con la librería `React`. En orden para trabajar en ella
+se requiere:
+
+- Clonar el repositorio y pasarse a esta rama:
+    ```shell
+    git clone git@github.com:CsarMan/malla-interactiva.git
+    cd malla-interactiva 
+    git checkout v2
+    ```
+    ó  
+    ```shell
+    git clone https://github.com/CsarMan/malla-interactiva.git
+    cd malla-interactiva
+    git checkout v2
+    ```
+
+- Instalar las dependencias del proyecto:
+    ```shell
+    yarn
+    ```
+    > Si no tiene yarn: `npm install -g yarn`
+- y listo, para ejecutar la app en modo desarrollo use
+    ```shell
+    yarn start
+    ```
+    y en el caso de trabajar en componentes concretos 
+    ```shell
+    yarn storybook
+    # Mas info en https://storybook.js.org/docs/react/get-started/introduction
+    ```
+    > También se pueden ejecutar al mismo tiempo si uno lo desea
+
+*Nota:* En caso de agregar nuevos componentes, es necesario crear una historia
+junto con su documentación (https://storybook.js.org/docs/react/writing-stories/introduction)
+
+Si quieren ver los componentes actualmente hechos pueden visitar el [storybook](https://v2--60160fa51b58a70021d7e084.chromatic.com) o la [librería](https://chromatic.com/library?appId=60160fa51b58a70021d7e084&branch=v2) de la rama
+
+
+
+
+
+---
 # Índice
 2. [Caracteristicas de la malla](#Características-de-la-malla)
 3. [TODO](#TODO)
