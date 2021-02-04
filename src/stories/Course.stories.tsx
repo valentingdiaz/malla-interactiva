@@ -3,12 +3,34 @@ import { Story, Meta } from '@storybook/react/types-6-0';
 import Course from "../components/Course";
 import CoursesContext from "../coursesContext";
 import CategoriesContext from "../categoriesContext";
-import {CategoriesDict, CoursesDict} from "../interfaces";
+import {CategoriesDict, CourseData, CoursesDict} from "../interfaces";
 
 export default {
     title: "Component/Course",
     component: Course,
     decorators: [Story => <div style={{display: "flex", justifyContent: "center", alignContent: "center", height: "100%"}}><svg width={130} height={130}><Story/></svg></div>],
+    parameters: {
+        backgrounds: {
+            values: [
+                { name: 'white', value: '#fff' },
+                { name: 'white', value: '#eee' },
+                { name: 'white', value: '#ddd' },
+                { name: 'white', value: '#ccc' },
+                { name: 'white', value: '#bbb' },
+                { name: 'white', value: '#aaa' },
+                { name: 'white', value: '#999' },
+                { name: 'white', value: '#888' },
+                { name: 'white', value: '#777' },
+                { name: 'white', value: '#666' },
+                { name: 'white', value: '#555' },
+                { name: 'white', value: '#444' },
+                { name: 'white', value: '#333' },
+                { name: 'white', value: '#222' },
+                { name: 'white', value: '#111' },
+                { name: 'black', value: '#000' },
+            ],
+        },
+    },
     argTypes: {
         x: {
             description: "Posición en el eje x del svg",
@@ -64,6 +86,15 @@ export default {
             },
             control: {type: 'text'}
         },
+        dictatedIn: {
+            description: "Semestres en que se dicta el ramo",
+            type: "string",
+            table: {
+                type: 'string',
+                defaultValue: "",
+                category: "story exclusive"
+            },
+        },
         creditsUSM: {
             description: 'Créditos USM del ramo',
             type: { name: 'number', required: false },
@@ -96,6 +127,15 @@ export default {
 
             },
             control: {type: 'color'}
+        },
+        whiteText: {
+            description: 'Color del texto con el nombre',
+            type: { name: 'boolean', required: false},
+            table: {
+                type: 'boolean',
+                defaultValue: true,
+                category: 'story exclusive'
+            },
         },
         prers: {
             description: 'Listado de abreviaturas de los ramos prerrequisitos',
@@ -147,10 +187,11 @@ Default3.argTypes = {
 // Custom
 
 const Template: Story = (args) => {
-    const course = {
+    const course:CourseData = {
         id: args.id,
         name: args.name,
         abbrev: args.abbrev,
+        dictatedIn: args.dictatedIn,
         creditsUSM: args.creditsUSM,
         creditsSCT: args.creditsSCT,
         category: "Mallas",
@@ -161,6 +202,7 @@ const Template: Story = (args) => {
             id: 20,
             name: args.name,
             abbrev: "ELO-204",
+            dictatedIn: args.dictatedIn,
             creditsUSM: args.creditsUSM,
             creditsSCT: args.creditsSCT,
             category: "verde",
@@ -169,7 +211,8 @@ const Template: Story = (args) => {
         "ELO-320": {
             id: 15,
             name: args.name,
-            abbrev: "morado",
+            abbrev: "ELO-320",
+            dictatedIn: args.dictatedIn,
             creditsUSM: args.creditsUSM,
             creditsSCT: args.creditsSCT,
             category: "morado",
@@ -178,7 +221,8 @@ const Template: Story = (args) => {
         "ELO-322": {
             id: 16,
             name: args.name,
-            abbrev: "naranjo",
+            abbrev: "ELO-322",
+            dictatedIn: args.dictatedIn,
             creditsUSM: args.creditsUSM,
             creditsSCT: args.creditsSCT,
             category: "naranjo",
@@ -187,7 +231,8 @@ const Template: Story = (args) => {
         "MAT-023": {
             id: 13,
             name: args.name,
-            abbrev: "verde",
+            abbrev: "MAT-023",
+            dictatedIn: args.dictatedIn,
             creditsUSM: args.creditsUSM,
             creditsSCT: args.creditsSCT,
             category: "verde",
@@ -236,6 +281,7 @@ Programacion.args = {
     id: 1,
     name: "Programación",
     abbrev: "IWI-131",
+    dictatedIn: "A",
     creditsUSM: 3,
     creditsSCT: 5,
     color: "#2E58A7",
@@ -258,6 +304,7 @@ TDdPdI.args = {
     id: 49,
     name: "Minería de datos",
     abbrev: "TEL-354",
+    dictatedIn: "P",
     creditsUSM: 3,
     creditsSCT: 5,
     color: "#813FA0",

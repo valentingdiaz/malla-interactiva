@@ -5,6 +5,7 @@ export interface CourseData {
     id: number,
     name: string,
     abbrev: string,
+    dictatedIn: "" | "A" | "P" | "I",
     creditsUSM: number,
     creditsSCT: number,
     category: string,
