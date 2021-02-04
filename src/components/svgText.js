@@ -19,13 +19,12 @@ class SvgText extends React.Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         let { wordsWithComputedWidth, spaceWidth, fontSize } = this.calculateWordWidths();
         let textHeight = this.props.height
         while (textHeight > parseInt(this.props.height) - 5) {
-            console.log(this.props.heigth, "height tre")
             let lines = this.calculateLines(wordsWithComputedWidth, spaceWidth, this.props.width);
-            textHeight = this.checkHeight(lines)
+            textHeight = this.checkHeight(lines, fontSize)
             if (textHeight > parseInt(this.props.height) - 5) {
                 fontSize = (parseInt(fontSize) - 1).toString();
                 ({wordsWithComputedWidth, spaceWidth, fontSize} = this.calculateWordWidths(fontSize));
@@ -79,10 +78,9 @@ class SvgText extends React.Component {
         if (this.props.children != nextProps.children || needFontSizeUpdate) {
             let { wordsWithComputedWidth, spaceWidth, fontSize } = this.calculateWordWidths();
             let textHeight = this.props.height
-            console.log(this.props.heigth, "height")
             while (textHeight > this.props.height - 5) {
                 let lines = this.calculateLines(wordsWithComputedWidth, spaceWidth, this.props.width);
-                textHeight = this.checkHeight(lines)
+                textHeight = this.checkHeight(lines, fontSize)
                 if (textHeight > this.props.height - 5) {
                     fontSize = (parseInt(fontSize) - 1).toString();
                     ({wordsWithComputedWidth, spaceWidth, fontSize} = this.calculateWordWidths(fontSize));
@@ -121,7 +119,6 @@ class SvgText extends React.Component {
 
         let wordsWithComputedWidth = words.map(word => {
             text.textContent = word;
-            console.log(text.getComputedTextLength())
             return {word, width: text.getComputedTextLength()}
         });
         while (wordsWithComputedWidth.reduce((result, {_, width}) => {
@@ -167,11 +164,14 @@ class SvgText extends React.Component {
         return wordsByLines.map(line => line.words.join(' '));
     }
 
-    checkHeight(wordsByLines) {
+    checkHeight(wordsByLines, fontSize) {
         // Retrieves height occupied by wrapped text
         const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
         Object.assign(text.style, this.props.style)
+        text.style.textAnchor = "middle"
+        text.style.dominantBaseline = "central"
+        text.style.fontSize = fontSize
         wordsByLines.forEach((line, index) => {
             let tspan = document.createElementNS("http://www.w3.org/2000/svg", "tspan")
             tspan.textContent = line
