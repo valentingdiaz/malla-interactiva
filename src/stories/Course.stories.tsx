@@ -1,46 +1,9 @@
 import React from "react";
-import { Meta } from '@storybook/react/types-6-0';
+import { Story, Meta } from '@storybook/react/types-6-0';
 import Course from "../components/Course";
 import CoursesContext from "../coursesContext";
 import CategoriesContext from "../categoriesContext";
 import {CategoriesDict, CoursesDict} from "../interfaces";
-
-
-interface DefaultCourseProps {
-    x: number,
-    y: number,
-    abbrev?: string,
-    id?: number,
-    name?: string,
-    creditsUSM?: number,
-    creditsSCT?: number
-}
-
-// Done in order to have type inference
-interface DefaultStory {
-    (args: DefaultCourseProps,): unknown;
-    args?: DefaultCourseProps;
-    storyName?: string;
-}
-
-interface CourseStoryProps {
-    x: number,
-    y: number,
-    abbrev: string,
-    id: number,
-    name: string,
-    creditsUSM: number,
-    creditsSCT: number,
-    color: string,
-    prers: string[]
-    whiteText: boolean,
-}
-
-interface AStory {
-    (args: CourseStoryProps,): unknown;
-    args?: CourseStoryProps;
-    storyName?: string;
-}
 
 export default {
     title: "Component/Course",
@@ -149,17 +112,17 @@ export default {
 
 } as Meta;
 
-const DefaultTemplate: DefaultStory = (args) => <Course {...args} />
+const DefaultTemplate: Story = (args) => <Course {...args} />
 
 // Default
 
-export const Default1: DefaultStory = DefaultTemplate.bind({});
+export const Default1: Story = DefaultTemplate.bind({});
 Default1.storyName = "Por Defecto 1"
 Default1.argTypes = {
     abbrev: {control: false}
 }
 
-export const Default2: DefaultStory = DefaultTemplate.bind({});
+export const Default2: Story = DefaultTemplate.bind({});
 Default2.storyName = "Por Defecto 2"
 Default2.args = {
     abbrev: "IMI-102",
@@ -170,7 +133,7 @@ Default2.argTypes = {
     abbrev: {control: false}
 }
 
-export const Default3: DefaultStory = DefaultTemplate.bind({});
+export const Default3: Story = DefaultTemplate.bind({});
 Default3.storyName = "Por Defecto 3"
 Default3.args = {
     abbrev: "IMI-103",
@@ -183,7 +146,7 @@ Default3.argTypes = {
 
 // Custom
 
-const Template: AStory = (args) => {
+const Template: Story = (args) => {
     const course = {
         id: args.id,
         name: args.name,
@@ -262,7 +225,7 @@ const Template: AStory = (args) => {
         value={{...categories}}><Course abbrev={args.abbrev}/></CategoriesContext.Provider> </CoursesContext.Provider></>
 }
 
-export const Programacion: AStory = Template.bind({});
+export const Programacion: Story = Template.bind({});
 Programacion.storyName = "Programación"
 Programacion.argTypes = {
     color: {control: 'color'},
@@ -282,7 +245,7 @@ Programacion.args = {
     y: 5,
 }
 
-export const TDdPdI: AStory = Template.bind({});
+export const TDdPdI: Story = Template.bind({});
 TDdPdI.storyName = "Minería de datos"
 TDdPdI.argTypes = {
     color: {control: 'color'},
