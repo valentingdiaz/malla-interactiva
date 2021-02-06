@@ -10,6 +10,15 @@ export type CurriculumState = {
     semesters: SemesterArray
 }
 
+// SemesterBar Component
+
+export type SemesterBarProps = {
+    x?: number,
+    y?: number,
+    semesters: SemesterArray
+}
+
+
 // SemesterIndicator Component
 
 export type SemesterIndicatorProps = {
