@@ -1,3 +1,11 @@
+// Semester Component
+
+export type SemesterProps = {
+    number: number,
+    courses: string[],
+    x?: number,
+    y?: number,
+}
 
 // Course Component
 import {CourseData} from "./interfaces";
