@@ -65,7 +65,7 @@ export default {
             control: {type: 'text'}
         },
         id: {
-            description: 'Identificador numérico del ramo. Se usa para facil reconocimiento en prerrequisitos',
+            description: 'Identificador numérico del ramo. Se usa para fácil reconocimiento en prerrequisitos',
             type: { name: 'number', required: false },
             table: {
                 type: { summary: 'number' },
@@ -153,13 +153,21 @@ export default {
 } as Meta;
 
 const DefaultTemplate: Story = (args) => <Course {...args} />
-
 // Default
 
 export const Default1: Story = DefaultTemplate.bind({});
 Default1.storyName = "Por Defecto 1"
 Default1.argTypes = {
-    abbrev: {control: false}
+    abbrev: {control: false},
+    id: {control: false},
+    name: {control: false},
+    dictatedIn: {control: false},
+    creditsUSM: {control: false},
+    creditsSCT: {control: false},
+    color: {control: false},
+    whiteText: {control: false},
+    prers: {control: false}
+
 }
 
 export const Default2: Story = DefaultTemplate.bind({});
@@ -170,7 +178,16 @@ Default2.args = {
     y: 5
 }
 Default2.argTypes = {
-    abbrev: {control: false}
+    abbrev: {control: false},
+    id: {control: false},
+    name: {control: false},
+    dictatedIn: {control: false},
+    creditsUSM: {control: false},
+    creditsSCT: {control: false},
+    color: {control: false},
+    whiteText: {control: false},
+    prers: {control: false}
+
 }
 
 export const Default3: Story = DefaultTemplate.bind({});
@@ -181,7 +198,16 @@ Default3.args = {
     y: 5
 }
 Default3.argTypes = {
-    abbrev: {control: false}
+    abbrev: {control: false},
+    id: {control: false},
+    name: {control: false},
+    dictatedIn: {control: false},
+    creditsUSM: {control: false},
+    creditsSCT: {control: false},
+    color: {control: false},
+    whiteText: {control: false},
+    prers: {control: false}
+
 }
 
 // Custom
