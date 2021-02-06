@@ -2,7 +2,7 @@ import { Component } from "react";
 import SvgText from "./svgText";
 import CoursesContext from "../coursesContext";
 import CategoriesContext from "../categoriesContext";
-import Prerequisites from "./prerequisites";
+import Prerequisites from "./Prerequisites";
 import {CourseProps, CourseState} from "../types";
 import {CourseData} from "../interfaces";
 
