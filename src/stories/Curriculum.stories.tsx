@@ -14,9 +14,69 @@ export default {
             type: { name: 'object', required: true },
             table: {
                 type: 'object',
-                defaultValue: "{ 1: [] }"
+                defaultValue: {summary: "{ 1: [] }"}
             },
         },
+        courseWidth: {
+            description: 'Ancho del ramo en pixeles',
+            type: { name: 'number', required: false },
+            table: {
+                type: { summary: 'number' },
+                defaultValue: {summary: 120},
+                category: 'course component'
+
+            },
+            control: {
+                type: 'range',
+                min: 10,
+                max: 500
+            }
+        },
+        courseHeight: {
+            description: 'Altura del ramo en pixeles',
+            type: { name: 'number', required: false },
+            table: {
+                type: { summary: 'number' },
+                defaultValue: {summary: 120},
+                category: 'course component'
+
+            },
+            control: {
+                type: 'range',
+                min: 10,
+                max: 500
+            }
+        },
+        ySeparator: {
+            description: 'Distancia entre cada ramo del eje y',
+            type: { name: 'number', required: false },
+            table: {
+                type: { summary: 'number' },
+                defaultValue: {summary: 10},
+                category: 'semester component'
+
+            },
+            control: {
+                type: 'range',
+                min: 0,
+                max: 100
+            }
+        },
+        xSeparator: {
+            description: 'Distancia entre cada ramo del eje x',
+            type: { name: 'number', required: false },
+            table: {
+                type: { summary: 'number' },
+                defaultValue: {summary: 10},
+
+            },
+            control: {
+                type: 'range',
+                min: 0,
+                max: 100
+            }
+        }
+
     },
 } as Meta;
 

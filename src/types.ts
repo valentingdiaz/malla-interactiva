@@ -4,6 +4,10 @@ import {CourseData, SemestersDict} from "./interfaces";
 
 export type CurriculumProps = {
     semesters: SemestersDict
+    courseWidth?: number,
+    courseHeight?: number,
+    xSeparator?: number,
+    ySeparator?: number,
 }
 
 export type CurriculumState = {
@@ -15,6 +19,9 @@ export type CurriculumState = {
 export type SemesterBarProps = {
     x?: number,
     y?: number,
+    xSeparator?: number,
+    courseWidth?: number,
+    height?: number,
     semesters: SemesterArray
 }
 
@@ -24,6 +31,8 @@ export type SemesterBarProps = {
 export type SemesterIndicatorProps = {
     x: number,
     y: number,
+    courseWidth?: number,
+    height?: number,
     number: number,
 }
 
@@ -34,6 +43,9 @@ export type SemesterProps = {
     courses: string[],
     x?: number,
     y?: number,
+    courseWidth?: number,
+    courseHeight?: number,
+    ySeparator?: number,
 }
 
 // Course Component
@@ -41,6 +53,8 @@ export type SemesterProps = {
 export type CourseProps = {
     x?: number,
     y?: number,
+    courseWidth?: number,
+    courseHeight?: number,
     abbrev?: string,
 }
 

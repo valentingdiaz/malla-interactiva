@@ -43,10 +43,12 @@ export default class Curriculum extends Component<CurriculumProps, CurriculumSta
 
     render() {
         const semesters = this.state.semesters
+        const courseInfo = this.props
+        const { courseWidth = 120, xSeparator = 10 } = courseInfo
         return (
             semesters.map((semester, index) => {
                 console.log(index, semester)
-                return <Semester x={130 * index} number={index + 1} key={index} courses={semester}/>
+                return <Semester x={(courseWidth + xSeparator) * index} number={index + 1} key={index} courses={semester} {...courseInfo}/>
             })
         );
     }

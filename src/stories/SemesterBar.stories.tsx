@@ -29,19 +29,64 @@ export default {
             },
             control: {type: 'number'}
         },
-        semesters: {
-            description: "Listado de semestres",
-            type: { name: 'array', required: true },
+        courseWidth: {
+            description: 'Ancho del ramo en pixeles',
+            type: { name: 'number', required: false },
             table: {
-                type: { summary: 'array' },
-                defaultValue: { summary: [] },
-                category: 'component'
+                type: { summary: 'number' },
+                defaultValue: {summary: 120},
+                category: 'course component'
+
             },
             control: {
-                type: 'array',
+                type: 'range',
+                min: 10,
+                max: 500
             }
         },
-    }
+        xSeparator: {
+            description: 'Distancia entre cada ramo del eje x',
+            type: { name: 'number', required: false},
+            table: {
+                type: { summary: 'number' },
+                defaultValue: {summary: 10},
+
+            },
+            control: {
+                type: 'range',
+                min: 0,
+                max: 100
+            }
+        },
+        height: {
+            description: 'altura de la barra en pixeles',
+            type: { name: 'number', required: false },
+            table: {
+                type: { summary: 'number' },
+                defaultValue: {summary: 20},
+                category: 'course component'
+
+            },
+            control: {
+                type: 'range',
+                min: 10,
+                max: 100
+            }
+        }
+
+    },
+    semesters: {
+        description: "Listado de semestres",
+        type: { name: 'array', required: true },
+        table: {
+            type: { summary: 'array' },
+            defaultValue: { summary: [] },
+            category: 'component'
+        },
+        control: {
+            type: 'array',
+        }
+    },
 } as Meta
 
 const Template: Story<SemesterBarProps> = (args) => <SemesterBar {...args} />

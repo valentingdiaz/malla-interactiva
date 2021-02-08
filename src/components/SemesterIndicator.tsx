@@ -2,15 +2,6 @@ import {Component} from "react";
 import {SemesterIndicatorProps} from "../types";
 
 export default class SemesterIndicator extends Component<SemesterIndicatorProps> {
-    private readonly width: number
-    private readonly height: number
-
-    constructor(props: SemesterIndicatorProps) {
-        super(props);
-        this.width = 120
-        this.height = 20
-
-    }
 
     romanize(number:number) :string {
         if (number > 89 || number < 1) {
@@ -37,13 +28,11 @@ export default class SemesterIndicator extends Component<SemesterIndicatorProps>
 
 
     render() {
-        const {x, y, number} = this.props
-        const height = this.height
-        const width = this.width
+        const {x, y, courseWidth = 120, height= 20, number} = this.props
         return (
             <g transform={`translate(${x}, ${y})`}>
-                <rect x={0} y={0} width={width} height={height} className={'courseBars'}/>
-                <text x={width / 2} y={height / 2} fontWeight={'bold'} dominantBaseline="central"
+                <rect x={0} y={0} width={courseWidth} height={height} className={'courseBars'}/>
+                <text x={courseWidth / 2} y={height / 2} fontWeight={'bold'} dominantBaseline="central"
                       textAnchor="middle" fill={'white'}>{this.romanize(number)}</text>
             </g>
         );

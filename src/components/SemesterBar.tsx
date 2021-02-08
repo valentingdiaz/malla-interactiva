@@ -4,17 +4,15 @@ import SemesterIndicator from "./SemesterIndicator";
 
 export default class SemesterBar extends Component<SemesterBarProps> {
 
-    constructor(props: SemesterBarProps) {
-        super(props);
-    }
-
     render() {
-        const { x = 0, y = 0, semesters = [] } = this.props
+
+        const { x = 0, y = 0, height = 20, courseWidth = 120, xSeparator = 10 ,semesters = [] } = this.props
+        const courseInfo = {height, courseWidth, xSeparator}
         return (
             <g>
-                <rect x={x} y={x} height={20} width={130 * semesters.length} className={"courseBars"} />
+                <rect x={x} y={x} height={height} width={(courseWidth + xSeparator) * semesters.length} className={"courseBars"} />
                 {semesters.map((semester, index) =>
-                    <SemesterIndicator x={x + (130 * index) } y={y} key={index} number={index + 1}/>
+                    <SemesterIndicator x={x + ((courseWidth + xSeparator) * index)} y={y} key={index} number={index + 1} {...courseInfo}/>
                 )}
             </g>
         );

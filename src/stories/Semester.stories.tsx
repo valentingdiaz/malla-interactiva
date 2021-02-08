@@ -29,6 +29,51 @@ export default {
             },
             control: {type: 'number'}
         },
+        courseWidth: {
+            description: 'Ancho del ramo en pixeles',
+            type: { name: 'number', required: false },
+            table: {
+                type: { summary: 'number' },
+                defaultValue: {summary: 120},
+                category: 'course component'
+
+            },
+            control: {
+                type: 'range',
+                min: 10,
+                max: 500
+            }
+        },
+        courseHeight: {
+            description: 'Altura del ramo en pixeles',
+            type: { name: 'number', required: false },
+            table: {
+                type: { summary: 'number' },
+                defaultValue: {summary: 120},
+                category: 'course component'
+
+            },
+            control: {
+                type: 'range',
+                min: 10,
+                max: 500
+            }
+        },
+        ySeparator: {
+            description: 'Distancia entre cada ramo del eje y',
+            type: { name: 'number', required: false },
+            table: {
+                type: { summary: 'number' },
+                defaultValue: {summary: 10},
+                category: 'component'
+
+            },
+            control: {
+                type: 'range',
+                min: 0,
+                max: 100
+            }
+        },
         number: {
             description: "Número del Semestre",
             type: { name: 'number', required: true },

@@ -53,6 +53,36 @@ export default {
             },
             control: {type: 'number'}
         },
+        courseWidth: {
+            description: 'Ancho del ramo en pixeles',
+            type: { name: 'number', required: false },
+            table: {
+                type: { summary: 'number' },
+                defaultValue: {summary: 120},
+                category: 'component'
+
+            },
+            control: {
+                type: 'range',
+                min: 10,
+                max: 500
+            }
+        },
+        courseHeight: {
+            description: 'Altura del ramo en pixeles',
+            type: { name: 'number', required: false },
+            table: {
+                type: { summary: 'number' },
+                defaultValue: {summary: 120},
+                category: 'component'
+
+            },
+            control: {
+                type: 'range',
+                min: 10,
+                max: 500
+            }
+        },
         abbrev: {
             description: 'Identificador del ramo. Se usa como llave para obtener la otra información del ramo',
             type: { name: 'string', required: true },

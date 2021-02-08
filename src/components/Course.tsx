@@ -9,14 +9,10 @@ import {CourseData} from "../interfaces";
 
 
 class Course extends Component<CourseProps, CourseState> {
-    private readonly height: number;
-    private readonly width: number;
     private readonly emptyCourse: CourseData
 
     constructor(props: CourseProps) {
         super(props);
-        this.height = 120;
-        this.width = 120;
         this.emptyCourse = {
             id:0,
             abbrev: "",
@@ -66,7 +62,7 @@ class Course extends Component<CourseProps, CourseState> {
     }
 
     render() {
-        const {x = 5, y = 5, abbrev = "IMI-101"} = this.props
+        const {x = 5, y = 5, courseHeight = 120, courseWidth = 120, abbrev = "IMI-101"} = this.props
         const course = this.state.course
         const semesterDictated = {
             '': "",
@@ -108,61 +104,61 @@ class Course extends Component<CourseProps, CourseState> {
                 {/* Descripción (debería esto ser otro componente(?)) */}
                 <title>Ramo {course.abbrev}, {course.name}. Este ramo
                     tiene {course.creditsUSM} créditos USM y {course.creditsSCT} créditos SCT. Se dicta en {semesterDictatedString[course.dictatedIn]} y {prersString}.</title>
-                <rect x={0} y={0} width={this.width} height={this.height}
+                <rect x={0} y={0} width={courseWidth} height={courseHeight}
                       className={"multiply"} fill={"url(#Gradient01)"}/>
                 <CategoriesContext.Consumer>
                     {categories =>
                         // Cuadrilátero de color correspondiente a categoría del ramo
-                        <rect x={0} y={this.height * 0.2} width={this.width} className={"multiply"} height={this.height * 0.6}
+                        <rect x={0} y={courseHeight * 0.2} width={courseWidth} className={"multiply"} height={courseHeight * 0.6}
                               fill={categories[course.category].color}/>
                     }
                 </CategoriesContext.Consumer>
                 {/* Barra Superior */}
-                <rect x={0} y={0} width={this.width} height={this.height * 0.2}
+                <rect x={0} y={0} width={courseWidth} height={courseHeight * 0.2}
                       className="multiply courseBars" />
                 <CategoriesContext.Consumer>
                     {categories =>
                         // Nombre del ramo
-                        <SvgText x={this.width * 0.5} y={this.height * 0.5} width={this.width * 0.9}
-                                 height={this.height * 0.6} className="ramo-label"
+                        <SvgText x={courseWidth * 0.5} y={courseHeight * 0.5} width={courseWidth * 0.9}
+                                 height={courseHeight * 0.6} className="ramo-label"
                                  fill={categories[course.category].whiteText ? 'white' : 'black'}
                                  textAnchor="middle"
                                  dominantBaseline="central">{course.name}</SvgText>
                     }
                 </CategoriesContext.Consumer>
                 {/* Barra inferior */}
-                <rect x={0} y={this.height * 0.8} width={this.width} height={this.height * 0.2}
+                <rect x={0} y={courseHeight * 0.8} width={courseWidth} height={courseHeight * 0.2}
                       className="courseBars multiply"/>
 
                 {/* Sigla del ramo */}
-                <text x={5} y={this.height * 0.1} dominantBaseline="central" fontWeight="bold" fill="white"
+                <text x={5} y={courseHeight * 0.1} dominantBaseline="central" fontWeight="bold" fill="white"
                       fontSize="15">{course.abbrev}</text>
 
                 {/* Semestres en que se dicta */}
-                <text x={this.width * 0.67} y={this.height * 0.1} fontWeight={"bold"} fontSize={15} dominantBaseline="central" fill={'yellow'}>{semesterDictated[course.dictatedIn]}</text>
+                <text x={courseWidth * 0.67} y={courseHeight * 0.1} fontWeight={"bold"} fontSize={15} dominantBaseline="central" fill={'yellow'}>{semesterDictated[course.dictatedIn]}</text>
 
                 {/* Identificador del ramo */}
-                <circle cx={this.width * 0.9} cy={this.height * 0.1} fill="white"
-                        r={(this.height < this.width ? this.height : this.width) * 0.08}/>
-                <text x={this.width * 0.9} y={this.height * 0.1} dominantBaseline="central"
+                <circle cx={courseWidth * 0.9} cy={courseHeight * 0.1} fill="white"
+                        r={(courseHeight < courseWidth ? courseHeight : courseWidth) * 0.08}/>
+                <text x={courseWidth * 0.9} y={courseHeight * 0.1} dominantBaseline="central"
                       textAnchor="middle"
                       fill="black"
                       fontSize="13">{course.id}</text>
 
                 {/* Prerrequisitos */}
-                <Prerequisites x={this.width * 0.12} y={this.height * 0.9} abbrev={abbrev}
-                               width={this.width * 0.74}/>
+                <Prerequisites x={courseWidth * 0.12} y={courseHeight * 0.9} abbrev={abbrev}
+                               width={courseWidth * 0.74}/>
 
                 {/* Créditos */}
-                <rect x={this.width * 0.73} y={this.height * 0.8} width={this.width * 0.25}
-                      height={this.height * 0.2} className={'isolate'} fill="white"/>
+                <rect x={courseWidth * 0.73} y={courseHeight * 0.8} width={courseWidth * 0.25}
+                      height={courseHeight * 0.2} className={'isolate'} fill="white"/>
                       {/* USM */}
-                <text x={this.width * 0.75} y={this.height * 0.82} fontWeight="regular" fill="black"
+                <text x={courseWidth * 0.75} y={courseHeight * 0.82} fontWeight="regular" fill="black"
                       dominantBaseline="hanging" textAnchor={"start"}
                       fontSize="13">{course.creditsUSM}
                 </text>
                       {/* SCT */}
-                <text x={this.width * 0.96} y={this.height * 0.98} fontWeight="regular" fill="black"
+                <text x={courseWidth * 0.96} y={courseHeight * 0.98} fontWeight="regular" fill="black"
                       dominantBaseline="auto" textAnchor={"end"}
                       fontSize="13">{course.creditsSCT}
                 </text>

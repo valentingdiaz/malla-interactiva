@@ -29,6 +29,37 @@ export default {
             },
             control: {type: 'number'}
         },
+        courseWidth: {
+            description: 'Ancho del ramo en pixeles',
+            type: { name: 'number', required: false },
+            table: {
+                type: { summary: 'number' },
+                defaultValue: {summary: 120},
+                category: 'course component'
+
+            },
+            control: {
+                type: 'range',
+                min: 10,
+                max: 500
+            }
+        },
+        height: {
+            description: 'altura de la barra en pixeles',
+            type: { name: 'number', required: false },
+            table: {
+                type: { summary: 'number' },
+                defaultValue: {summary: 20},
+                category: 'course component'
+
+            },
+            control: {
+                type: 'range',
+                min: 10,
+                max: 100
+            }
+        },
+
         number: {
             description: "Numero del semestre que indica",
             type: { name: 'number', required: true },
