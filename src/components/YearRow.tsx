@@ -10,10 +10,12 @@ export default class YearRow extends Component<YearRowProps> {
             <g transform={`translate(${x}, ${y})`}>
                 {semesters.map((semester, index) => {
                     if ((index + 1) % 2 == 0){
-                        return <YearBar x={x + (courseWidth + xSeparator ) * 2 * Math.floor(index / 2)} key={year} y={y} height={height} courseWidth={courseWidth} number={year++}/>
+                        // Full Year
+                        return <YearBar x={x + (courseWidth + xSeparator ) * 2 * Math.floor(index / 2)} key={year} y={y} xSeparator={xSeparator} height={height} courseWidth={courseWidth} number={year++}/>
                     } else {
                         if (index + 1 == semesters.length)
-                            return <YearBar x={x + (courseWidth + xSeparator ) * 2 * Math.floor(index / 2)} y={y} key={year} number={year} height={height} courseWidth={courseWidth} halfYear={true}/>
+                            // Half Year
+                            return <YearBar x={x + (courseWidth + xSeparator ) * 2 * Math.floor(index / 2)} y={y} key={year} number={year} height={height} xSeparator={xSeparator} courseWidth={courseWidth} halfYear={true}/>
                     }
                     return true
                     }
