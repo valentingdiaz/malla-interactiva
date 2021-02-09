@@ -27,9 +27,9 @@ export type YearBarProps = {
 }
 
 
-// SemesterBar Component
+// SemesterRow Component
 
-export type SemesterBarProps = {
+export type SemesterRowProps = {
     x?: number,
     y?: number,
     xSeparator?: number,
@@ -39,9 +39,9 @@ export type SemesterBarProps = {
 }
 
 
-// SemesterIndicator Component
+// SemesterBar Component
 
-export type SemesterIndicatorProps = {
+export type SemesterBarProps = {
     x: number,
     y: number,
     courseWidth?: number,
