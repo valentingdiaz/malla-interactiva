@@ -1,4 +1,4 @@
-import {CourseData, SemestersDict} from "./interfaces";
+import {CategoryData, CourseData, SemestersDict} from "./interfaces";
 
 // Curriculum Component
 
@@ -94,7 +94,26 @@ export type PrerequisitesProps = {
     x?: number,
     y?: number,
 }
+// CategoriesContainer component
+
+export type CategoriesContainerProps = {
+
+}
+
+export type CategoriesContainerState = {
+    categories: string[]
+}
+
+// CategoryInfo component
+
+export type CategoryInfoProps = {
+    category: string
+}
+
+export type CategoryInfoState = CategoryData;
+
 
 // misc
+
 
 export type SemesterArray = string[][]
