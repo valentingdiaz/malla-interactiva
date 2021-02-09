@@ -1,13 +1,12 @@
 import React from "react";
 import { Story, Meta } from '@storybook/react/types-6-0';
-import YearBar from "../components/YearBar";
-import {YearBarProps} from "../types";
-
+import YearRow from "../components/YearRow";
+import {YearRowProps} from "../types";
 
 export default {
-    title: "component/yearBar",
-    component: YearBar,
-    decorators: [Story => <div style={{display: "flex", justifyContent: "center", alignContent: "center", height: "100%"}}><svg viewBox={'0 0 250 60'} width={250}><Story/></svg></div>],
+    title: "component/yearRow",
+    component: YearRow,
+    decorators: [Story => <div style={{display: "flex", justifyContent: "center", alignContent: "center", height: "100%"}}><svg viewBox={'0 0 900 60'} width={900}><Story/></svg></div>],
     argTypes: {
         x: {
             description: "Posición en el eje x del svg",
@@ -72,40 +71,21 @@ export default {
                 max: 100
             }
         },
-        number: {
-            description: "Número del año o semi año a representar",
-            type: { name: 'number', required: true },
+        semesters: {
+            description: 'Listado de semestres',
+            type: {name: 'array', required: true},
             table: {
-                type: { summary: 'number' },
-                defaultValue: { summary: 1 },
-                category: 'component'
+                type: {summary: 'array'},
+                defaultValue: { summary: "[]"},
             },
-            control: {type: 'number'}
-        },
-        halfYear: {
-            description: "Indica si el año es de un semestre o no",
-            type: { name: 'boolean', required: false },
-            table: {
-                type: { summary: 'boolean' },
-                defaultValue: { summary: false },
-                category: 'component'
-            },
-            control: {type: 'boolean'}
-
+            control: {
+                type: "array"
+            }
         }
+    },
+    args: {
+        semesters: [[],[],[]]
     }
 } as Meta
 
-const Template: Story<YearBarProps> = (args: YearBarProps) => <YearBar {...args}/>
-
-export const FullYear = Template.bind({})
-FullYear.args = {
-    number: 1,
-}
-
-export const HalfYear = Template.bind({})
-HalfYear.args = {
-    x: 65,
-    number: 2,
-    halfYear: true,
-}
+export const Default: Story<YearRowProps> = (args) => <YearRow {...args}/>
