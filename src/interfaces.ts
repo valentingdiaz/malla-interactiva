@@ -3,7 +3,6 @@
 
 export interface SemestersDict {
     [key: string]: string[],
-    [key: number]: string[],
 }
 
 // Courses Context

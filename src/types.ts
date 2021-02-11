@@ -1,5 +1,22 @@
 import {CategoryData, CourseData, SemestersDict} from "./interfaces";
 
+
+// CurriculumRow Component
+
+export type CurriculumRowProps = {
+    semesters: SemestersDict,
+    courseWidth?: number,
+    height?: number,
+    xSeparator?: number,
+    ySeparator?: number,
+}
+
+export type CurriculumRowState = {
+    semesters: SemesterArray,
+    width: number,
+    height: number,
+}
+
 // Curriculum Component
 
 export type CurriculumProps = {
