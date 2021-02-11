@@ -9,10 +9,10 @@ export default class SemesterRow extends Component<SemesterRowProps> {
         const { x = 0, y = 0, height = 20, courseWidth = 120, xSeparator = 10 ,semesters = [] } = this.props
         const courseInfo = {height, courseWidth, xSeparator}
         return (
-            <g>
-                <rect x={x} y={x} height={height} width={(courseWidth + xSeparator) * semesters.length} className={"courseBars"} />
+            <g transform={`translate(${x}, ${y})`}>
+                <rect x={0} y={0} height={height} width={courseWidth * semesters.length + xSeparator * (semesters.length - 1)} className={"courseBars"} />
                 {semesters.map((semester, index) =>
-                    <SemesterBar x={x + ((courseWidth + xSeparator) * index)} y={y} key={index} number={index + 1} {...courseInfo}/>
+                    <SemesterBar x={((courseWidth + xSeparator) * index)} y={0} key={index} number={index + 1} {...courseInfo}/>
                 )}
             </g>
         );

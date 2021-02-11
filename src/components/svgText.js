@@ -51,15 +51,15 @@ class SvgText extends React.Component {
                 {this.state.lines.map((word, index, lines) => {
                     if (lines.length !== 1)
                         if (index === 0)
-                            return <tspan x={x}  dominantBaseline="central" dy={`${-(lineHeight * lines.length / 2 - lineHeight / 2)}em`}>
+                            return <tspan x={x} key={index} dominantBaseline="central" dy={`${-(lineHeight * lines.length / 2 - lineHeight / 2)}em`}>
                                 {word}
                             </tspan>
                         else
-                            return <tspan x={x}  dominantBaseline="central" dy={`${lineHeight}em`}>
+                            return <tspan x={x} key={index} dominantBaseline="central" dy={`${lineHeight}em`}>
                                 {word}
                             </tspan>
                     else
-                        return <tspan x={x} dominantBaseline="central" dy={`${0}em`}>
+                        return <tspan x={x} key={index} dominantBaseline="central" dy={`${0}em`}>
                             {word}
                         </tspan>
                 })}
