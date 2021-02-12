@@ -1,6 +1,5 @@
 import React from "react";
-import {CoursesDict} from "./interfaces";
-
+import {CoursesDict, DictatedIn} from "./interfaces";
 
 
 const CoursesContext = React.createContext<CoursesDict>( {
@@ -8,7 +7,7 @@ const CoursesContext = React.createContext<CoursesDict>( {
         id: 0,
         name: 'Introducción a la malla interactiva',
         abbrev: 'IMI-101',
-        dictatedIn: "A",
+        dictatedIn: DictatedIn.BOTH,
         creditsUSM: 1,
         creditsSCT: 2,
         category: 'Mallas',
@@ -18,7 +17,7 @@ const CoursesContext = React.createContext<CoursesDict>( {
         id: 1,
         name: "Mallas y Complejidad",
         abbrev: 'IMI-102',
-        dictatedIn: "A",
+        dictatedIn: DictatedIn.BOTH,
         creditsUSM: 1,
         creditsSCT: 2,
         category: 'Mallas',
@@ -28,7 +27,7 @@ const CoursesContext = React.createContext<CoursesDict>( {
         id: 2,
         name: "Análisis y Diseño de Mallas",
         abbrev: 'IMI-103',
-        dictatedIn: "A",
+        dictatedIn: DictatedIn.BOTH,
         creditsUSM: 2,
         creditsSCT: 3,
         category: 'Mallas2',

@@ -7,25 +7,39 @@ import {SemesterBarProps} from "../types";
 export default {
     title: "Component/SemesterBar",
     component: SemesterBar,
-    decorators: [Story => <div style={{display: "flex", justifyContent: "center", alignContent: "center", height: "100%"}}><svg viewBox={'0 0 120 20'} width={120}><Story/></svg></div>],
+    decorators: [Story => <div style={{display: "flex", justifyContent: "center", alignContent: "center", height: "100%"}}><Story/></div>],
     argTypes: {
-        x: {
-            description: "Posición en el eje x del svg",
+        number: {
+            description: "Numero del semestre que indica",
             type: { name: 'number', required: true },
             table: {
                 type: { summary: 'number' },
+                defaultValue: { summary: 1 },
+                category: 'obligatory'
+            },
+            control: {
+                type: 'range',
+                min: 1,
+                max: 89,
+            }
+        },
+        x: {
+            description: "Posición en el eje x del svg",
+            type: { name: 'number', required: false },
+            table: {
+                type: { summary: 'number' },
                 defaultValue: { summary: 0 },
-                category: 'component'
+                category: 'optional'
             },
             control: {type: 'number'}
         },
         y: {
             description: "Posición en el eje y del svg",
-            type: { name: 'number', required: true },
+            type: { name: 'number', required: false },
             table: {
                 type: { summary: 'number' },
                 defaultValue: { summary: 0 },
-                category: 'component'
+                category: 'optional'
             },
             control: {type: 'number'}
         },
@@ -35,7 +49,7 @@ export default {
             table: {
                 type: { summary: 'number' },
                 defaultValue: {summary: 120},
-                category: 'course component'
+                category: 'optional'
 
             },
             control: {
@@ -50,7 +64,7 @@ export default {
             table: {
                 type: { summary: 'number' },
                 defaultValue: {summary: 20},
-                category: 'course component'
+                category: 'optional'
 
             },
             control: {
@@ -59,29 +73,18 @@ export default {
                 max: 100
             }
         },
-
-        number: {
-            description: "Numero del semestre que indica",
-            type: { name: 'number', required: true },
+        onClick: {
+            description: 'Función que se activa al hacer click en el ramo',
             table: {
-                type: { summary: 'number' },
-                defaultValue: { summary: 1 },
-                category: 'component'
-            },
-            control: {
-                type: 'range',
-                min: 1,
-                max: 89,
+                category: 'optional',
             }
-        },
+        }
     }
 } as Meta
 
-const Template: Story<SemesterBarProps> = (args) => <SemesterBar {...args} />
+const Template: Story<SemesterBarProps> = (args) => <svg width={args.courseWidth} height={args.height}> <SemesterBar {...args} />  </svg>
 
 export const Default = Template.bind({})
 Default.args = {
-    x: 0,
-    y: 0,
     number: 1
 }

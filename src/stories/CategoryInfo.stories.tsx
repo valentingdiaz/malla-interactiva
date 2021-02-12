@@ -10,13 +10,19 @@ export default {
     decorators: [Story => <div style={{display: "flex", justifyContent: "center", alignContent: "center", height: "100%"}}><Story/></div>],
     argTypes: {
         category: {
-            description: "Llave para acceder a los datos de la categoría dentro del Contexto",
-            type: { name: "string", required: true },
+            description: "Objeto que contiene información de la categoría",
+            type: { name: "object", required: true},
             table: {
-                type: { summary: "string" },
-                defaultValue: { summary: "Mallas"}
-            },
+                type: { summary: "{...}", detail: "{\n    name: 'string',\n    color: 'string',\n    whiteText?: 'boolean'\n}"}
+            }
+        },
+        onClick: {
+            description: 'Función que se activa al hacer click en el ramo',
+            table: {
+                category: 'optional',
+            }
         }
+
     },
     args: {
       category: "Mallas"
@@ -27,4 +33,8 @@ const Template: Story<CategoryInfoProps> = (args) => <CategoryInfo {...args}/>
 
 export const Default = Template.bind({})
 Default.args = {
+    category: {
+        name: "Plan Común",
+        color: "#993366"
+    }
 }

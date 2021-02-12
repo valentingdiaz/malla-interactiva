@@ -11,10 +11,10 @@ export interface CourseData {
     id: number,
     name: string,
     abbrev: string,
-    dictatedIn: "" | "A" | "P" | "I",
+    dictatedIn: DictatedIn,
+    category: string,
     creditsUSM: number,
     creditsSCT: number,
-    category: string,
     prers: string[]
 }
 
@@ -32,4 +32,17 @@ export interface CategoryData {
 
 export interface CategoriesDict {
     [key : string]: CategoryData
+}
+
+// misc
+
+export interface CustomCategories {
+    [key: string]: { id: number, color: string, whiteText?: boolean }
+}
+
+export enum DictatedIn {
+    UNKNOWN = "",
+    BOTH = "A",
+    EVEN = "P",
+    ODD = "I"
 }

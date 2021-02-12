@@ -1,4 +1,4 @@
-import {CategoryData, CourseData, SemestersDict} from "./interfaces";
+import {CategoriesDict, CategoryData, CourseData, CustomCategories, SemestersDict} from "./interfaces";
 
 
 // CurriculumRow Component
@@ -45,14 +45,15 @@ export type YearRowProps = {
 // YearBar Component
 
 export type YearBarProps = {
-    x?: number,
-    y?: number,
-    courseWidth?: number,
-    height?: number,
-    xSeparator?: number,
     number: number,
-    halfYear?: Boolean,
-}
+} & OptionalYearBarProps
+
+export type OptionalYearBarProps = {
+    height: number,
+    halfYear: Boolean,
+    courseWidth: number,
+    xSeparator: number,
+} & Position & OnClick
 
 
 // SemesterRow Component
@@ -70,12 +71,13 @@ export type SemesterRowProps = {
 // SemesterBar Component
 
 export type SemesterBarProps = {
-    x: number,
-    y: number,
-    courseWidth?: number,
-    height?: number,
     number: number,
-}
+} & OptionalSemesterBarProps
+
+export type OptionalSemesterBarProps = {
+    courseWidth: number,
+    height: number,
+} & Position & OnClick
 
 // Semester Component
 
@@ -91,13 +93,9 @@ export type SemesterProps = {
 
 // Course Component
 
-export type CourseProps = {
-    x?: number,
-    y?: number,
-    courseWidth?: number,
-    courseHeight?: number,
-    abbrev?: string,
-}
+export type CourseProps = Required<CourseData> & OptionalCourseProps
+
+export type OptionalCourseProps = DefaultCourseSize & Position & OnClick & { customCategories: CustomCategories, custom: boolean }
 
 export type CourseState = {
     course: CourseData,
@@ -105,12 +103,11 @@ export type CourseState = {
 
 // Prerequisite component
 export type PrerequisitesProps = {
-    abbrev?: string,
-    height?: number,
-    width?: number,
-    x?: number,
-    y?: number,
-}
+    prers: string[],
+} & OptionalPrerequisitesProps
+
+export type OptionalPrerequisitesProps = Position & { height: number, width: number, categories: CustomCategories, custom: boolean }
+
 // CategoriesContainer component
 
 export type CategoriesContainerProps = {
@@ -124,13 +121,27 @@ export type CategoriesContainerState = {
 // CategoryInfo component
 
 export type CategoryInfoProps = {
-    category: string
-}
+    category: CategoryData
+} & OptionalCategoryInfoProps
 
-export type CategoryInfoState = CategoryData;
-
+export type OptionalCategoryInfoProps = OnClick
 
 // misc
 
 
 export type SemesterArray = string[][]
+
+type DefaultCourseSize = {
+    courseWidth: number,
+    courseHeight: number,
+}
+
+type OnClick = {
+    onClick: () => void
+}
+
+type Position = {
+    x: number,
+    y: number
+}
+

@@ -1,97 +1,101 @@
 import { Component } from "react";
 import SvgText from "./svgText";
-import CoursesContext from "../coursesContext";
 import CategoriesContext from "../categoriesContext";
 import Prerequisites from "./Prerequisites";
-import {CourseProps, CourseState} from "../types";
-import {CourseData} from "../interfaces";
+import {CourseProps, CourseState, OptionalCourseProps} from "../types";
+import {DictatedIn} from "../interfaces";
 
 
 
-class Course extends Component<CourseProps, CourseState> {
-    private readonly emptyCourse: CourseData
-
-    constructor(props: CourseProps) {
-        super(props);
-        this.emptyCourse = {
-            id:0,
-            abbrev: "",
-            dictatedIn: "",
-            category: "",
-            creditsSCT: 0,
-            creditsUSM: 0,
-            name: "",
-            prers: []
-        }
-        this.state = {
-            course: this.emptyCourse        }
+class Course extends Component<CourseProps> {
+    static defaultProps: OptionalCourseProps = {
+        courseHeight: 120,
+        courseWidth: 120,
+        x: 5,
+        y: 5,
+        onClick: () => {},
+        customCategories: {},
+        custom: false
     }
 
-    componentDidMount() {
-        const {abbrev = "IMI-101"} = this.props
-        const contextCourse = this.context[abbrev]
-        if (!this.coursesAreEqual(this.state.course, contextCourse))
-            this.setState({course: contextCourse})
+    selectPrer(prers: string[]): JSX.Element {
+        const { courseHeight, courseWidth} = this.props
+        if (this.props.custom)
+            return <Prerequisites x={courseWidth * 0.12} y={courseHeight * 0.9} prers={prers} categories={this.props.customCategories} custom={true}/>
+        else
+            return <Prerequisites x={courseWidth * 0.12} y={courseHeight * 0.9} prers={prers}/>
     }
 
-    componentDidUpdate(prevProps: Readonly<CourseProps>, prevState: Readonly<{}>, snapshot?: any) {
-        const {abbrev = "IMI-101"} = this.props
-        const contextCourse = this.context[abbrev]
-        if (!this.coursesAreEqual(this.state.course, contextCourse))
-            this.setState({course: contextCourse})
-    }
+    paintCourse(courseWidth: number, courseHeight: number): JSX.Element {
+        const {name, category , abbrev} = this.props
+        if (this.props.custom) {
+            const { customCategories:categories } = this.props
+            return (
+                <>
+                    // Cuadrilátero de color correspondiente a categoría del ramo
+                    <rect x={0} y={courseHeight * 0.2} width={courseWidth} className={"multiply"}
+                          height={courseHeight * 0.6}
+                          fill={categories[abbrev].color}/>
 
-    coursesAreEqual(course: CourseData, contextCourse: CourseData) :boolean {
-        let key: keyof CourseData
-        for (key in course) {
-            if (key === 'prers'){
-                const coursePrers = course[key]
-                const contextCoursePrers= contextCourse[key]
-                if (coursePrers.length !== contextCoursePrers.length)
-                    return false
-                for (let i = 0; i < coursePrers.length; i++) {
-                    if (coursePrers[i] !== contextCoursePrers[i])
-                        return false
-                }
-            } else {
-                if (course[key] !== contextCourse[key])
-                    return false
-            }
-        }
-        return true
+
+                    // Nombre del ramo
+                    <SvgText x={courseWidth * 0.5} y={courseHeight * 0.5} width={courseWidth * 0.9}
+                             height={courseHeight * 0.6} className="ramo-label"
+                             fill={categories[abbrev].whiteText ? 'white' : 'black'}
+                             textAnchor="middle"
+                             dominantBaseline="central">{name}</SvgText>
+                </>
+
+            )
+        }        else
+            return (
+                <CategoriesContext.Consumer>
+                    {categories => <>
+
+                        // Cuadrilátero de color correspondiente a categoría del ramo
+                        <rect x={0} y={courseHeight * 0.2} width={courseWidth} className={"multiply"} height={courseHeight * 0.6}
+                              fill={categories[category].color}/>
+
+
+                        // Nombre del ramo
+                        <SvgText x={courseWidth * 0.5} y={courseHeight * 0.5} width={courseWidth * 0.9}
+                                 height={courseHeight * 0.6} className="ramo-label"
+                                 fill={categories[category].whiteText ? 'white' : 'black'}
+                                 textAnchor="middle"
+                                 dominantBaseline="central">{name}</SvgText>
+                    </>
+                    }
+                </CategoriesContext.Consumer>
+            )
     }
 
     render() {
-        const {x = 5, y = 5, courseHeight = 120, courseWidth = 120, abbrev = "IMI-101"} = this.props
-        const course = this.state.course
+        const {x, y, courseHeight, courseWidth, id, abbrev, dictatedIn, name , category, creditsUSM, creditsSCT, prers} = this.props
         const semesterDictated = {
-            '': "",
-            "A": "",
-            "P": "P",
-            "I": "I"
+            [DictatedIn.UNKNOWN]: "",
+            [DictatedIn.BOTH]: "",
+            [DictatedIn.EVEN]: "P",
+            [DictatedIn.ODD]: "I"
         }
         const semesterDictatedString = {
-            '': "¿ambos semestres?",
-            "A": "ambos semestres",
-            "P": "semestres pares",
-            "I": "semesters impares"
+            [DictatedIn.UNKNOWN]: "¿ambos semestres?",
+            [DictatedIn.BOTH]: "ambos semestres",
+            [DictatedIn.EVEN]: "semestres pares",
+            [DictatedIn.ODD]: "semesters impares"
         }
         let prersString: string
-        switch (course.prers.length) {
+        switch (prers.length) {
             case 0:
                 prersString = "no tiene prerrequisitos"
                 break
             case 1:
-                prersString = `tiene como prerrequisito a ${course.prers[0]}`
+                prersString = `tiene como prerrequisito a ${prers[0]}`
                 break
             default:
-                let prers = [...course.prers]
-                const lastPrer = prers.pop()
-                prersString = "tiene como prerrequisitos a " + prers.join(", ") + ` y ${lastPrer}`
+                let copyPrers = [...prers]
+                const lastPrer = copyPrers.pop()
+                prersString = "tiene como prerrequisitos a " + copyPrers.join(", ") + ` y ${lastPrer}`
                 break
-        }
-        if (this.coursesAreEqual(course, this.emptyCourse)) {
-            return <></>
         }
         return (
             <g cursor="pointer" className={'isolate course'} role="img" transform={`translate(${x}, ${y})`}>
@@ -102,40 +106,26 @@ class Course extends Component<CourseProps, CourseState> {
                     </linearGradient>
                 </defs>
                 {/* Descripción (debería esto ser otro componente(?)) */}
-                <title>Ramo {course.abbrev}, {course.name}. Este ramo
-                    tiene {course.creditsUSM} créditos USM y {course.creditsSCT} créditos SCT. Se dicta en {semesterDictatedString[course.dictatedIn]} y {prersString}.</title>
+                <title>Ramo {abbrev}, {name}. Este ramo
+                    tiene {creditsUSM} créditos USM y {creditsSCT} créditos SCT. Se dicta en {semesterDictatedString[dictatedIn]} y {prersString}.</title>
                 <rect x={0} y={0} width={courseWidth} height={courseHeight}
                       className={"multiply"} fill={"url(#Gradient01)"}/>
-                <CategoriesContext.Consumer>
-                    {categories =>
-                        // Cuadrilátero de color correspondiente a categoría del ramo
-                        <rect x={0} y={courseHeight * 0.2} width={courseWidth} className={"multiply"} height={courseHeight * 0.6}
-                              fill={categories[course.category].color}/>
-                    }
-                </CategoriesContext.Consumer>
+
+                {this.paintCourse(courseWidth, courseHeight)}
+
                 {/* Barra Superior */}
                 <rect x={0} y={0} width={courseWidth} height={courseHeight * 0.2}
                       className="multiply courseBars" />
-                <CategoriesContext.Consumer>
-                    {categories =>
-                        // Nombre del ramo
-                        <SvgText x={courseWidth * 0.5} y={courseHeight * 0.5} width={courseWidth * 0.9}
-                                 height={courseHeight * 0.6} className="ramo-label"
-                                 fill={categories[course.category].whiteText ? 'white' : 'black'}
-                                 textAnchor="middle"
-                                 dominantBaseline="central">{course.name}</SvgText>
-                    }
-                </CategoriesContext.Consumer>
                 {/* Barra inferior */}
                 <rect x={0} y={courseHeight * 0.8} width={courseWidth} height={courseHeight * 0.2}
                       className="courseBars multiply"/>
 
                 {/* Sigla del ramo */}
                 <text x={5} y={courseHeight * 0.1} dominantBaseline="central" fontWeight="bold" fill="white"
-                      fontSize="15">{course.abbrev}</text>
+                      fontSize="15">{abbrev}</text>
 
                 {/* Semestres en que se dicta */}
-                <text x={courseWidth * 0.67} y={courseHeight * 0.1} fontWeight={"bold"} fontSize={15} dominantBaseline="central" fill={'yellow'}>{semesterDictated[course.dictatedIn]}</text>
+                <text x={courseWidth * 0.67} y={courseHeight * 0.1} fontWeight={"bold"} fontSize={15} dominantBaseline="central" fill={'yellow'}>{semesterDictated[dictatedIn]}</text>
 
                 {/* Identificador del ramo */}
                 <circle cx={courseWidth * 0.9} cy={courseHeight * 0.1} fill="white"
@@ -143,11 +133,10 @@ class Course extends Component<CourseProps, CourseState> {
                 <text x={courseWidth * 0.9} y={courseHeight * 0.1} dominantBaseline="central"
                       textAnchor="middle"
                       fill="black"
-                      fontSize="13">{course.id}</text>
+                      fontSize="13">{id}</text>
 
                 {/* Prerrequisitos */}
-                <Prerequisites x={courseWidth * 0.12} y={courseHeight * 0.9} abbrev={abbrev}
-                               width={courseWidth * 0.74}/>
+                {this.selectPrer(prers)}
 
                 {/* Créditos */}
                 <rect x={courseWidth * 0.73} y={courseHeight * 0.8} width={courseWidth * 0.25}
@@ -155,12 +144,12 @@ class Course extends Component<CourseProps, CourseState> {
                       {/* USM */}
                 <text x={courseWidth * 0.75} y={courseHeight * 0.82} fontWeight="regular" fill="black"
                       dominantBaseline="hanging" textAnchor={"start"}
-                      fontSize="13">{course.creditsUSM}
+                      fontSize="13">{creditsUSM}
                 </text>
                       {/* SCT */}
                 <text x={courseWidth * 0.96} y={courseHeight * 0.98} fontWeight="regular" fill="black"
                       dominantBaseline="auto" textAnchor={"end"}
-                      fontSize="13">{course.creditsSCT}
+                      fontSize="13">{creditsSCT}
                 </text>
 
             </g>
@@ -168,6 +157,5 @@ class Course extends Component<CourseProps, CourseState> {
     }
 }
 
-Course.contextType = CoursesContext
 
 export default Course;

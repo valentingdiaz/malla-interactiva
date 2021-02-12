@@ -1,9 +1,19 @@
 import { Component } from "react";
-import {YearBarProps} from "../types";
+import {OptionalYearBarProps, YearBarProps} from "../types";
 
 export default class YearBar extends Component<YearBarProps> {
+    static defaultProps: OptionalYearBarProps = {
+        height: 20,
+        halfYear: false,
+        x: 0,
+        y: 0,
+        courseWidth: 120,
+        xSeparator: 10,
+        onClick: () => {}
+
+    }
     render() {
-        const { x = 0, y = 0, courseWidth = 120, height = 20 ,xSeparator = 10, number = 2, halfYear = false} = this.props
+        const { x, y, courseWidth, height ,xSeparator, number, halfYear} = this.props
         if (halfYear)
             return (
                 <g transform={`translate(${x}, ${y})`}>

@@ -1,7 +1,14 @@
 import {Component} from "react";
-import {SemesterBarProps} from "../types";
+import {OptionalSemesterBarProps, SemesterBarProps} from "../types";
 
 export default class SemesterBar extends Component<SemesterBarProps> {
+    static defaultProps: OptionalSemesterBarProps = {
+        x: 0,
+        y: 0,
+        courseWidth: 120,
+        height: 20,
+        onClick: () => {}
+    }
 
     romanize(number:number) :string {
         if (number > 89 || number < 1) {
@@ -28,7 +35,7 @@ export default class SemesterBar extends Component<SemesterBarProps> {
 
 
     render() {
-        const {x, y, courseWidth = 120, height= 20, number} = this.props
+        const {x, y, courseWidth, height, number} = this.props
         return (
             <g transform={`translate(${x}, ${y})`}>
                 <rect x={0} y={0} width={courseWidth} height={height} className={'courseBars'}/>
