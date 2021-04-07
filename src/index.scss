@@ -24,6 +24,47 @@
   }
 }
 
+.progress {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  height: $progress-height;
+  line-height: $progress-height;
+  @include font-size($progress-font-size);
+  @include border-radius($progress-border-radius);
+  @include box-shadow($progress-box-shadow);
+
+}
+
+.progress-left {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: $progress-bar-bg;
+  color: white;
+  transition: clip-path 1s;
+
+}
+
+.progress-right {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: $progress-bg;
+  color: $progress-bar-bg;
+  transition: clip-path 1s ;
+}
+
 .isolate {
   isolation: isolate;
   mix-blend-mode: unset;
@@ -54,7 +95,7 @@
 @import "~bootstrap/scss/badge";
 @import "~bootstrap/scss/jumbotron";
 @import "~bootstrap/scss/alert";
-@import "~bootstrap/scss/progress";
+//@import "~bootstrap/scss/progress";
 @import "~bootstrap/scss/media";
 @import "~bootstrap/scss/list-group";
 @import "~bootstrap/scss/close";

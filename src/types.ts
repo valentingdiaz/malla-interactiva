@@ -126,6 +126,21 @@ export type CategoryInfoProps = {
 
 export type OptionalCategoryInfoProps = OnClick
 
+// Progress
+
+export type ProgressProps = {
+
+} & OptionalProgressProps
+
+export type OptionalProgressProps = {
+    text: string,
+    min: number,
+    max: number,
+    now: number,
+    style: {},
+    variant: string,
+}
+
 // misc
 
 
