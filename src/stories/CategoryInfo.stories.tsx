@@ -7,7 +7,6 @@ import {CategoryInfoProps} from "../types";
 export default {
     title: "component/CategoryInfo",
     component: CategoryInfo,
-    decorators: [Story => <div style={{display: "flex", justifyContent: "center", alignContent: "center", height: "100%"}}><Story/></div>],
     argTypes: {
         category: {
             description: "Objeto que contiene información de la categoría",

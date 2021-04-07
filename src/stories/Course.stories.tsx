@@ -7,7 +7,6 @@ import {DictatedIn} from "../interfaces";
 export default {
     title: "Component/Course",
     component: Course,
-    decorators: [Story => <div style={{display: "flex", justifyContent: "center", alignContent: "center", height: "100%"}}><Story/></div>],
     parameters: {
         backgrounds: {
             values: [

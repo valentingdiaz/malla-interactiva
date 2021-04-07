@@ -5,9 +5,8 @@ import {YearBarProps} from "../types";
 
 
 export default {
-    title: "component/yearBar",
+    title: "component/YearBar",
     component: YearBar,
-    decorators: [Story => <div style={{display: "flex", justifyContent: "center", alignContent: "center", height: "100%"}}><Story/></div>],
     argTypes: {
         number: {
             description: "Número del año o semi año a representar",

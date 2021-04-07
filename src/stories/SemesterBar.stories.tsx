@@ -7,7 +7,6 @@ import {SemesterBarProps} from "../types";
 export default {
     title: "Component/SemesterBar",
     component: SemesterBar,
-    decorators: [Story => <div style={{display: "flex", justifyContent: "center", alignContent: "center", height: "100%"}}><Story/></div>],
     argTypes: {
         number: {
             description: "Numero del semestre que indica",
