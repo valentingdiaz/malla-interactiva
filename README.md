@@ -13,8 +13,9 @@ Proyecto Universitario open-source en donde se mantiene una plataforma web que f
 
 ---
 
-Esta rama corresponde al version 2 de la malla, rescrita desde cero usando `TypeScript` junto con la librería `React`. En orden para trabajar en ella
-se requiere:
+Esta rama corresponde al version 2 de la malla, rescrita desde cero usando `TypeScript` junto con la librería `React`. Si se quiere ver la rama con la version actualmente liberada, [**cambie a la branch master**](https://github.com/CsarMan/malla-interactiva/tree/master).
+También se puede encontrar [más abajo](#Índice) información de la malla
+En orden para aportar se requiere:
 
 - Clonar el repositorio y pasarse a esta rama:
     ```shell
@@ -38,7 +39,7 @@ se requiere:
     ```shell
     yarn start
     ```
-    y en el caso de trabajar en componentes concretos 
+    En el caso de trabajar en componentes concretos 
     ```shell
     yarn storybook
     # Mas info en https://storybook.js.org/docs/react/get-started/introduction
@@ -56,7 +57,7 @@ Si quieren ver los componentes actualmente hechos pueden visitar el [storybook](
 
 ---
 # Índice
-2. [Caracteristicas de la malla](#Características-de-la-malla)
+1. [Caracteristicas de la malla](#Características-de-la-malla)
 3. [TODO](#TODO)
 4. [¿Cómo funciona la malla?](#¿Cómo-funciona-la-malla?)
 4. [Agregar o cambiar una malla](#Agregar-o-cambiar-una-malla)
@@ -85,7 +86,7 @@ Si quieren ver los componentes actualmente hechos pueden visitar el [storybook](
 * [ ] Facilitar creación y modificación de mallas oficiales
     * [ ] Crear forma rápida para cambiar solo un ramo
 * [ ] Hacer un mejor uso de las características de github
-    * [ ] Definir Miletones importantes
+    * [ ] Definir Milestones importantes
     * [ ] Crear pruebas y automatizarlas con github actions
     * [ ] Hacer uso de tags (tal vez)
 
@@ -94,7 +95,7 @@ Si quieren ver los componentes actualmente hechos pueden visitar el [storybook](
 ## ¿Cómo funciona la malla?
 
 Cada malla necesita de dos archivos `.json` para que esta se muestre en el sitio. Estos tienen por nombre
-`data_CARR.json` y `colors_CARR.json` y se ubican en el directorio `/data`. `CARR` corresponde a la abrebiatura de la carrera (por Ej: INF para informática) El primero (`data_CARR.json`) contiene
+`data_CARR.json` y `colors_CARR.json` y se ubican en el directorio `/data`. `CARR` corresponde a la abreviatura de la carrera (por Ej: INF para informática) El primero (`data_CARR.json`) contiene
 la información de cada ramo y sus características agrupados por semestre. Se sigue la siguiente estructura:  
 ```json5
 {
@@ -210,7 +211,7 @@ dentro del mismo directorio del repositorio.
 
 
 ### Usando Firefox
-Se tiene que abrir el `index.html` con **Firefox** (debido a que los otros navegadores tienen
+Se tiene que abrir él `index.html` con **Firefox** (debido a que los otros navegadores tienen
 desactivada la lectura de archivos locales por defecto), y al final de la URL agregar `?m=CARR`. Por ejemplo,
 para abrir `data_INF.json` debería quedar algo como `index.html?m=INF`.
 
