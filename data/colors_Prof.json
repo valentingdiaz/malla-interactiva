@@ -1,0 +1,5 @@
+{
+	"MAT": ["#FFA647 ", "Campo de la Formacion General"],
+	"CONS": ["#1F758E", "Campo de la Practica Docente"],
+	"ECO": ["#421970", "Campo de la Formacion Especifica"],
+	}
